@@ -117,6 +117,19 @@ proxy / http://127.0.0.1:9000 {
 }
 ```
 
+If you have set [`baseUrl`](/docs/configuration#fileupload) option, then you will need to add extra configuration to proxy the upload urls.
+
+If you set the `baseURL` to `https://example.com/folder/` then you need to add the following to your example.com server block:
+
+```caddy
+example.com {
+	proxy /folder/ http://127.0.0.1:9000/uploads {
+		without /folder
+		transparent
+	}
+}
+```
+
 ## [HAProxy](https://www.haproxy.org/)
 
 ```
